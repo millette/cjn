@@ -12,8 +12,8 @@ export default class Index extends React.Component {
         <h1>Home Page</h1>
         <p>Welcome, {name}</p>
         <ul>
-          <li><Link prefetch href='/a'><a>a</a></Link></li>
-          <li><Link prefetch href='/b'><a>b</a></Link></li>
+          <li><Link prefetch href='/a'><a>aaa</a></Link></li>
+          <li><Link prefetch href='/b'><a>bbb</a></Link></li>
           <li><Link prefetch href='/'><a>index</a></Link></li>
         </ul>
       </div>

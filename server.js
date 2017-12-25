@@ -31,12 +31,22 @@ app.prepare()
     const server = new Koa()
     const router = new Router()
 
-    router.get('/favicon.ico', async (ctx) => {
-      await app.serveStatic(ctx.req, ctx.res, 'static/favicon.ico')
-      ctx.respond = false
-    })
+    const rootStatic = ['favicon.ico'] // static assets available at /
+    rootStatic.forEach((r) => {
+        // on /[X], read thru static/[X]
+        router.get('/' + r, async (ctx) => {
+          await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
+          ctx.respond = false
+        })
+        // on static/[X] redirect to /[X]
+        router.get('/static/' + r, (ctx) => {
+          ctx.status = 301 // make it permanent (temporary by default)
+          ctx.redirect('/' + r)
+        })
+      })
 
-    ;['', 'a', 'b'].forEach((x) => router.get('/' + x, doit))
+    const routes = ['', 'a', 'b']
+    routes.forEach((x) => router.get('/' + x, doit))
 
     router.get('*', async (ctx) => {
       await handle(ctx.req, ctx.res)
