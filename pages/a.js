@@ -1,6 +1,6 @@
-import Link from 'next/link'
+import Layout from '../components/layout'
 
-export default () => <div>
-  <Link prefetch href='/'><a>index</a></Link>
+export default () => <Layout title='Page AAA'>
+  <h2>Page AAA</h2>
   <p>aaa</p>
-</div>
+</Layout>

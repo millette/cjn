@@ -1,6 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
 import faker from 'faker' // see package.json (browser key) excluded from client-side bundle
+import Layout from '../components/layout'
 
 export default class Index extends React.Component {
   static getInitialProps ({ req }) { return { name: req ? faker.name.findName() : 'Robin' } }
@@ -8,15 +8,37 @@ export default class Index extends React.Component {
   render () {
     const { name } = this.props
     return (
-      <div>
-        <h1>Home Page</h1>
-        <p>Welcome, {name}</p>
-        <ul>
-          <li><Link prefetch href='/a'><a>aaa</a></Link></li>
-          <li><Link prefetch href='/b'><a>bbb</a></Link></li>
-          <li><Link prefetch href='/'><a>index</a></Link></li>
-        </ul>
-      </div>
+      <Layout title='Front'>
+        <div className='columns'>
+          <div className='column'>
+            <h1 className='title is-1'>Home Page</h1>
+            <p>Welcome, {name}</p>
+          </div>
+        </div>
+        <div className='columns is-mobile is-multiline'>
+          <div className='column is-half-mobile is-one-third-tablet'>
+            Programme CCI
+          </div>
+          <div className='column is-half-mobile is-one-third-tablet'>
+            J'ai un projet pour ma communauté
+          </div>
+          <div className='column is-half-mobile is-one-third-tablet'>
+            Chantier à l'internationnal
+          </div>
+          <div className='column is-half-mobile is-one-third-tablet'>
+            Accueillir un chantier
+          </div>
+          <div className='column is-half-mobile is-one-third-tablet'>
+            CEIC
+          </div>
+          <div className='column is-half-mobile is-one-third-tablet'>
+            À propos
+          </div>
+        </div>
+        <div>
+          <p>Carroussel d'actualités</p>
+        </div>
+      </Layout>
     )
   }
 }
