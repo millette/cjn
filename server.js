@@ -11,7 +11,7 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
-const renderToHTML = (key) => app.renderToHTML(true, true, key) // {} instead of true also works
+const renderToHTML = (key) => app.renderToHTML({}, {}, key)
 
 const lru = new AsyncLRU({
   max: 20,
@@ -25,6 +25,16 @@ const lru = new AsyncLRU({
 
 const getit = promisify(lru.get.bind(lru))
 const doit = async (ctx) => { ctx.body = await getit(ctx.url) }
+
+/*
+// won't work, need to use query parameters and asPath
+const doit2 = async (ctx) => {
+  console.log('CTX:', Object.keys(ctx))
+  console.log('CTX-params:', ctx.params)
+  console.log('CTX-captures:', ctx.captures)
+  ctx.body = await getit('/c')
+}
+*/
 
 app.prepare()
   .then(() => {
@@ -47,6 +57,7 @@ app.prepare()
 
     const routes = ['', 'a', 'b']
     routes.forEach((x) => router.get('/' + x, doit))
+    // router.get('/a/:yo', doit2)
 
     router.get('*', async (ctx) => {
       await handle(ctx.req, ctx.res)
