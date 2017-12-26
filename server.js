@@ -33,17 +33,17 @@ app.prepare()
 
     const rootStatic = ['favicon.ico'] // static assets available at /
     rootStatic.forEach((r) => {
-        // on /[X], read thru static/[X]
-        router.get('/' + r, async (ctx) => {
-          await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
-          ctx.respond = false
-        })
-        // on static/[X] redirect to /[X]
-        router.get('/static/' + r, (ctx) => {
-          ctx.status = 301 // make it permanent (temporary by default)
-          ctx.redirect('/' + r)
-        })
+      // on /[X], read thru static/[X]
+      router.get('/' + r, async (ctx) => {
+        await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
+        ctx.respond = false
       })
+      // on static/[X] redirect to /[X]
+      router.get('/static/' + r, (ctx) => {
+        ctx.status = 301 // make it permanent (temporary by default)
+        ctx.redirect('/' + r)
+      })
+    })
 
     const routes = ['', 'a', 'b']
     routes.forEach((x) => router.get('/' + x, doit))
