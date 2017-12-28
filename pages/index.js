@@ -3,15 +3,15 @@ import faker from 'faker' // see package.json (browser key) excluded from client
 import Layout from '../components/layout'
 
 export default class Index extends React.Component {
-  static getInitialProps ({ req }) { return { name: req ? faker.name.findName() : 'Robin' } }
+  static getInitialProps ({ req, query }) { return { lang: query.lang, name: req ? faker.name.findName() : 'Robin' } }
 
   render () {
-    const { name } = this.props
+    const { name, lang } = this.props
     return (
-      <Layout title='Front'>
+      <Layout lang={lang} title='Front'>
         <div className='columns'>
           <div className='column'>
-            <h1 className='title is-1'>Home Page</h1>
+            <h1 className='title is-1'>Home Page {lang}</h1>
             <p>Welcome, {name}</p>
           </div>
         </div>

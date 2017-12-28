@@ -1,3 +1,4 @@
+import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 
@@ -29,53 +30,127 @@ import Head from 'next/head'
  *
 */
 
-export default ({ children, title = 'This is the default title' }) => (
-  <div className='container'>
-    <Head>
-      <title>{ title }</title>
-      <meta charSet='utf-8' />
-      <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-      <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
-    </Head>
-    <header className='columns'>
-      <div className='column'>
-        <nav>
-          <Link prefetch href='/a'><a>aaa</a></Link> |
-          <Link prefetch href='/b'><a>bbb</a></Link> |
-          <Link prefetch href='/c'><a>ccc</a></Link> |
-          <Link prefetch href='/'><a>index</a></Link>
-        </nav>
-      </div>
-      <div className='column is-one-quarter'>
-        langue | espace membre
-      </div>
-    </header>
+export default class Layout extends React.Component {
+  tock (ev) {
+    console.log('TOCK')
+    this.setState({ lang: this.state.lang === 'en' ? 'fr' : 'en' })
+  }
 
-    <div className='columns'>
-      <div className='column'>
-        { children }
+  render () {
+    const { title, lang, children } = this.props
+    // const { title, children } = this.props
+    // const { lang } = this.state
+
+    return (
+      <div className='container'>
+        <Head>
+          <title>{ title } { lang }</title>
+          <meta charSet='utf-8' />
+          <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+          <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
+        </Head>
+        <header className='columns'>
+          <div className='column'>
+            <nav>
+              <Link prefetch href={{ pathname: '/a', query: { lang } }} as={`/${lang}/a`}><a>aaa</a></Link> |
+              <Link prefetch href={{ pathname: '/b', query: { lang } }} as={`/${lang}/b`}><a>bbb</a></Link> |
+              <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a>ccc</a></Link> |
+              <Link prefetch href={{ pathname: '/', query: { lang } }} as={`/${lang}/`}><a>index</a></Link>
+            </nav>
+          </div>
+          <div className='column is-one-quarter'>
+            <button onClick={this.tock.bind(this)}>langue</button> | espace membre
+          </div>
+        </header>
+
+        <div className='columns'>
+          <div className='column'>
+            { children }
+          </div>
+          <div className='column is-one-quarter'>
+            <div>
+              <p>
+                Timeline <a href='https://www.facebook.com/Chantiersjeunesse/'>Chantiers jeunesse</a> Facebook
+              </p>
+              <div>Faire un Don</div>
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <p>Nous joindre</p>
+          <div>
+            Mentions et Logo des Partenaires
+          </div>
+        </footer>
+
+        <style global jsx>{`
+          .column {
+            border: thin red solid;
+          }
+        `}</style>
       </div>
-      <div className='column is-one-quarter'>
-        <div>
-          <p>
-            Timeline <a href='https://www.facebook.com/Chantiersjeunesse/'>Chantiers jeunesse</a> Facebook
-          </p>
-          <div>Faire un Don</div>
+    )
+  }
+}
+
+/*
+export default ({ lang, children, title = 'This is the default title' }) => {
+  if (!lang) { lang = 'fr' }
+  const tock = (ev) => {
+    console.log('TOCK', ev, this)
+  }
+
+  return (
+    <div className='container'>
+      <Head>
+        <title>{ title } { lang }</title>
+        <meta charSet='utf-8' />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
+      </Head>
+      <header className='columns'>
+        <div className='column'>
+          <nav>
+            <Link prefetch href={{ pathname: '/a', query: { lang } }} as={`/${lang}/a`}><a>aaa</a></Link> |
+            <Link prefetch href={{ pathname: '/b', query: { lang } }} as={`/${lang}/b`}><a>bbb</a></Link> |
+            <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a>ccc</a></Link> |
+            <Link prefetch href={{ pathname: '/', query: { lang } }} as={`/${lang}/`}><a>index</a></Link>
+          </nav>
+        </div>
+        <div className='column is-one-quarter'>
+          <button onClick={tock}>langue</button> | espace membre
+        </div>
+      </header>
+
+      <div className='columns'>
+        <div className='column'>
+          { children }
+        </div>
+        <div className='column is-one-quarter'>
+          <div>
+            <p>
+              Timeline <a href='https://www.facebook.com/Chantiersjeunesse/'>Chantiers jeunesse</a> Facebook
+            </p>
+            <div>Faire un Don</div>
+          </div>
         </div>
       </div>
+
+      <footer>
+        <p>Nous joindre</p>
+        <div>
+          Mentions et Logo des Partenaires
+        </div>
+      </footer>
+
+      <style global jsx>{`
+        .column {
+          border: thin red solid;
+        }
+      `}</style>
     </div>
+  )
+}
 
-    <footer>
-      <p>Nous joindre</p>
-      <div>
-        Mentions et Logo des Partenaires
-      </div>
-    </footer>
-
-    <style global jsx>{`
-      .column {
-        border: thin red solid;
-      }
-    `}</style>
-  </div>
-)
+*/

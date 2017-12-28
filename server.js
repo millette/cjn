@@ -15,6 +15,13 @@ const { URL } = require('url')
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
+
+// console.log('APP.router:', app.router)
+// console.log('APP.router.routes:', app.router.routes)
+// console.log('APP.router.routes.size:', app.router.routes.size)
+// console.log('APP.router.routes.get(GET):', app.router.routes.get('GET'))
+// app.router.routes.get('GET').forEach((x) => console.log(x.fn.toString()))
+
 const handle = app.getRequestHandler()
 
 const renderToHTML = (key, o) => app.renderToHTML({}, {}, key, o)
@@ -26,7 +33,8 @@ const lru = new AsyncLRU({
     const u = new URL(key, 'http://localhost/')
     const n = u.pathname
     const id = u.searchParams.get('id')
-    return renderToHTML(n, { id })
+    const lang = u.searchParams.get('lang')
+    return renderToHTML(n, { id, lang })
       .then((x) => cb(null, x))
       .catch(cb)
   }
@@ -35,9 +43,20 @@ const lru = new AsyncLRU({
 // lru.on('evict', ({ key, value }) => console.log('evicting', key, value.length))
 
 const getit = promisify(lru.get.bind(lru))
-const doit = async (ctx) => { ctx.body = await getit(ctx.url) }
 
-const doit2 = async (ctx) => { ctx.body = await getit('/c?id=' + ctx.params.id.split('?')[0]) }
+const doit = async (ctx) => {
+  const u = '/' + ctx.url.split('/')[2]
+  const it = u + '?lang=' + ctx.params.lang.split('?')[0]
+  console.log(ctx.url, ctx.params, u, it)
+  ctx.body = await getit(it)
+}
+
+const doit2 = async (ctx) => {
+  const it = '/c?id=' + ctx.params.id.split('?')[0] + '&lang=' + ctx.params.lang.split('?')[0]
+  // console.log('IT:', it)
+  // console.log(ctx.url, ctx.params)
+  ctx.body = await getit(it)
+}
 
 app.prepare()
   .then(() => {
@@ -60,8 +79,10 @@ app.prepare()
     })
 
     const routes = ['', 'a', 'b', 'c']
-    routes.forEach((x) => router.get('/' + x, doit))
-    router.get('/c/:id', doit2)
+    routes.forEach((x) => router.get('/:lang/' + x, doit))
+    router.get('/:lang/c/:id', doit2)
+    // router.get('/c/:id', doit2)
+    // router.get('/en/c/:id', doit2)
 
     router.get('*', async (ctx) => {
       await handle(ctx.req, ctx.res)
