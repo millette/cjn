@@ -31,15 +31,29 @@ import Head from 'next/head'
 */
 
 export default class Layout extends React.Component {
+/*
   tock (ev) {
     console.log('TOCK')
     this.setState({ lang: this.state.lang === 'en' ? 'fr' : 'en' })
   }
+*/
+
+/*
+  constructor (a, b, c, d, e) {
+    console.log('AA:', a)
+    console.log('BB:', b)
+    console.log('CC:', c)
+    console.log('DD:', d)
+    console.log('EE:', e)
+    super()
+  }
+*/
 
   render () {
-    const { title, lang, children } = this.props
+    const { page, title, lang, children } = this.props
     // const { title, children } = this.props
     // const { lang } = this.state
+    console.log('PAGE:', page)
 
     return (
       <div className='container'>
@@ -59,7 +73,9 @@ export default class Layout extends React.Component {
             </nav>
           </div>
           <div className='column is-one-quarter'>
-            <button onClick={this.tock.bind(this)}>langue</button> | espace membre
+            <Link href={{ pathname: '/' + page, query: { lang: 'fr' } }} as={'/fr/' + page}><a>fr</a></Link> |
+            <Link href={{ pathname: '/' + page, query: { lang: 'en' } }} as={'/en/' + page}><a>en</a></Link> |
+            espace membre
           </div>
         </header>
 

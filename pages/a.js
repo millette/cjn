@@ -8,7 +8,7 @@ export default class B extends React.Component {
     const lang = this.props.lang || 'fr'
 
     return (
-      <Layout lang={lang} title='Page AAA'>
+      <Layout page='a' lang={lang} title='Page AAA'>
         <h2 className='title is-2'>Page AAA {lang}</h2>
         <p>aaa</p>
       </Layout>

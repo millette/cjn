@@ -6,12 +6,14 @@ export default class C extends React.Component {
   static getInitialProps ({ query }) { return query }
 
   render () {
-    const Dl = this.props.id
+    const id = this.props.id
+
+    const Dl = id
       ? () => {
         return (
           <dl>
             <dt>CCC</dt>
-            <dd>{this.props.id}</dd>
+            <dd>{id}</dd>
           </dl>
         )
       }
@@ -20,7 +22,7 @@ export default class C extends React.Component {
     const lang = this.props.lang || 'fr'
 
     return (
-      <Layout lang={lang} title='Page CCC'>
+      <Layout page='c' id={id} lang={lang} title='Page CCC'>
         <h2 className='title is-2'>Page CCC {lang}</h2>
         <div className='content'>
           <Dl />

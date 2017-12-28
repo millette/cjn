@@ -8,7 +8,7 @@ export default class Index extends React.Component {
   render () {
     const { name, lang } = this.props
     return (
-      <Layout lang={lang} title='Front'>
+      <Layout page='' lang={lang} title='Front'>
         <div className='columns'>
           <div className='column'>
             <h1 className='title is-1'>Home Page {lang}</h1>
