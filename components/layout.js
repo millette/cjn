@@ -42,6 +42,7 @@ export default ({ children, title = 'This is the default title' }) => (
         <nav>
           <Link prefetch href='/a'><a>aaa</a></Link> |
           <Link prefetch href='/b'><a>bbb</a></Link> |
+          <Link prefetch href='/c'><a>ccc</a></Link> |
           <Link prefetch href='/'><a>index</a></Link>
         </nav>
       </div>
