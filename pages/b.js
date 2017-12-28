@@ -5,7 +5,7 @@ export default class B extends React.Component {
   static getInitialProps ({ query }) { return query }
 
   render () {
-    const lang = this.props.lang || 'fr'
+    const lang = this.props.lang
 
     return (
       <Layout page='b' lang={lang} title='Page BBB'>

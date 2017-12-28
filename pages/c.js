@@ -9,17 +9,15 @@ export default class C extends React.Component {
     const id = this.props.id
 
     const Dl = id
-      ? () => {
-        return (
-          <dl>
-            <dt>CCC</dt>
-            <dd>{id}</dd>
-          </dl>
-        )
-      }
+      ? () => (
+        <dl>
+          <dt>CCC</dt>
+          <dd>{id}</dd>
+        </dl>
+      )
       : () => null
 
-    const lang = this.props.lang || 'fr'
+    const lang = this.props.lang
 
     return (
       <Layout page='c' id={id} lang={lang} title='Page CCC'>

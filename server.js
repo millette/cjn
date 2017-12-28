@@ -16,12 +16,6 @@ const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 
-// console.log('APP.router:', app.router)
-// console.log('APP.router.routes:', app.router.routes)
-// console.log('APP.router.routes.size:', app.router.routes.size)
-// console.log('APP.router.routes.get(GET):', app.router.routes.get('GET'))
-// app.router.routes.get('GET').forEach((x) => console.log(x.fn.toString()))
-
 const handle = app.getRequestHandler()
 
 const renderToHTML = (key, o) => app.renderToHTML({}, {}, key, o)
@@ -45,16 +39,12 @@ const lru = new AsyncLRU({
 const getit = promisify(lru.get.bind(lru))
 
 const doit = async (ctx) => {
-  const u = '/' + ctx.url.split('/')[2]
-  const it = u + '?lang=' + ctx.params.lang.split('?')[0]
-  console.log(ctx.url, ctx.params, u, it)
+  const it = '/' + ctx.url.split('/')[2] + '?lang=' + (ctx.params.lang.split('?')[0] || 'fr')
   ctx.body = await getit(it)
 }
 
 const doit2 = async (ctx) => {
-  const it = '/c?id=' + ctx.params.id.split('?')[0] + '&lang=' + ctx.params.lang.split('?')[0]
-  // console.log('IT:', it)
-  // console.log(ctx.url, ctx.params)
+  const it = '/c?id=' + ctx.params.id.split('?')[0] + '&lang=' + (ctx.params.lang.split('?')[0] || 'fr')
   ctx.body = await getit(it)
 }
 
