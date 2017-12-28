@@ -34,13 +34,27 @@ export default class Layout extends React.Component {
   render () {
     const { id, page, title, lang, children } = this.props
 
-    const Lng = () => {
+    const One = () => {
       const p2 = page || 'index2'
       const p = id ? (page + '/' + id) : page
+      let l
+      let str
+
+      if (lang === 'fr') {
+        l = 'en'
+        str = 'Switch to English'
+      } else {
+        l = 'fr'
+        str = 'Passer en français'
+      }
+
+      return <Link href={{ pathname: '/' + p2, query: { id, lang: l } }} as={'/' + l + '/' + p}><a>{ str }</a></Link>
+    }
+
+    const Lng = () => {
       return (
         <div className='column is-one-quarter'>
-          <Link href={{ pathname: '/' + p2, query: { id, lang: 'fr' } }} as={'/fr/' + p}><a>fr</a></Link> |
-          <Link href={{ pathname: '/' + p2, query: { id, lang: 'en' } }} as={'/en/' + p}><a>en</a></Link> |
+          <One /> |
           espace membre
         </div>
       )
