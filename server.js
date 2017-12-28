@@ -39,7 +39,8 @@ const lru = new AsyncLRU({
 const getit = promisify(lru.get.bind(lru))
 
 const doit = async (ctx) => {
-  const it = '/' + ctx.url.split('/')[2] + '?lang=' + (ctx.params.lang.split('?')[0] || 'fr')
+  const p = ctx.url.split('/')[2] || 'index2'
+  const it = '/' + p + '?lang=' + (ctx.params.lang.split('?')[0] || 'fr')
   ctx.body = await getit(it)
 }
 
@@ -71,8 +72,6 @@ app.prepare()
     const routes = ['', 'a', 'b', 'c']
     routes.forEach((x) => router.get('/:lang/' + x, doit))
     router.get('/:lang/c/:id', doit2)
-    // router.get('/c/:id', doit2)
-    // router.get('/en/c/:id', doit2)
 
     router.get('*', async (ctx) => {
       await handle(ctx.req, ctx.res)

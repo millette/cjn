@@ -35,11 +35,12 @@ export default class Layout extends React.Component {
     const { id, page, title, lang, children } = this.props
 
     const Lng = () => {
+      const p2 = page || 'index2'
       const p = id ? (page + '/' + id) : page
       return (
         <div className='column is-one-quarter'>
-          <Link href={{ pathname: '/' + page, query: { id, lang: 'fr' } }} as={'/fr/' + p}><a>fr</a></Link> |
-          <Link href={{ pathname: '/' + page, query: { id, lang: 'en' } }} as={'/en/' + p}><a>en</a></Link> |
+          <Link href={{ pathname: '/' + p2, query: { id, lang: 'fr' } }} as={'/fr/' + p}><a>fr</a></Link> |
+          <Link href={{ pathname: '/' + p2, query: { id, lang: 'en' } }} as={'/en/' + p}><a>en</a></Link> |
           espace membre
         </div>
       )
@@ -59,7 +60,7 @@ export default class Layout extends React.Component {
               <Link prefetch href={{ pathname: '/a', query: { lang } }} as={`/${lang}/a`}><a>aaa</a></Link> |
               <Link prefetch href={{ pathname: '/b', query: { lang } }} as={`/${lang}/b`}><a>bbb</a></Link> |
               <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a>ccc</a></Link> |
-              <Link prefetch href={{ pathname: '/', query: { lang } }} as={`/${lang}/`}><a>index</a></Link>
+              <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a>index</a></Link>
             </nav>
           </div>
           <Lng />
