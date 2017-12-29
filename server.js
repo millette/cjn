@@ -77,8 +77,8 @@ app.prepare()
     })
 
     const routes = ['', 'a', 'b', 'c']
-    routes.forEach((x) => router.get('/:lang/' + x, doit))
-    router.get('/:lang/c/:id', doit2)
+    routes.forEach((x) => router.get('/:lang(fr|en)/' + x, doit))
+    router.get('/:lang(fr|en)/c/:id', doit2)
     router.get('/', doit3)
 
     router.get('*', async (ctx) => {
