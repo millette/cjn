@@ -16,9 +16,10 @@
     "react-dom": "^16.2.0"
   },
   "scripts": {
-    "dev": "standard && node server.js",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js",
+    "dev": "standard && node server",
+    "build": "standard && next build",
+    "now-build": "next build",
+    "start": "NODE_ENV=production node server",
     "analyze": "standard && cross-env ANALYZE=1 next build",
     "lint": "standard"
   },
