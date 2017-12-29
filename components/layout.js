@@ -54,7 +54,8 @@ export default class Layout extends React.Component {
     const Lng = () => {
       return (
         <div className='column is-one-quarter'>
-          <One /> |
+          <One />
+          <br />
           espace membre
         </div>
       )
