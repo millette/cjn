@@ -102,7 +102,7 @@ export default class Layout extends React.Component {
         </footer>
 
         <style global jsx>{`
-          .column666 {
+          .column {
             border: thin red solid;
           }
         `}</style>
