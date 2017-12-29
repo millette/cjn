@@ -3,7 +3,7 @@
 // npm
 const Koa = require('koa')
 const next = require('next')
-const Router = require('koa-router')
+const Router = require('koa-router') // replace with  koa-route
 const compression = require('compression')
 const koaConnect = require('koa-connect')
 const AsyncLRU = require('async-lru')
@@ -54,47 +54,49 @@ const doit3 = async (ctx) => {
   ctx.body = await getit('/')
 }
 
-app.prepare()
-  .then(() => {
-    const server = new Koa()
-    const router = new Router()
-
-    server.use(logger())
-
-    // static assets available at /
-    const rootStatic = ['favicon.ico']
-    rootStatic.forEach((r) => {
-      // on /[X], read thru static/[X]
-      router.get('/' + r, async (ctx) => {
-        await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
-        ctx.respond = false
-      })
-      // on static/[X] redirect to /[X]
-      router.get('/static/' + r, (ctx) => {
-        ctx.status = 301 // make it permanent (temporary by default)
-        ctx.redirect('/' + r)
-      })
-    })
-
-    const routes = ['', 'a', 'b', 'c']
-    routes.forEach((x) => router.get('/:lang(fr|en)/' + x, doit))
-    router.get('/:lang(fr|en)/c/:id', doit2)
-    router.get('/', doit3)
-
-    router.get('*', async (ctx) => {
-      await handle(ctx.req, ctx.res)
-      ctx.respond = false
-    })
-
-    server.use(async (ctx, next) => {
-      ctx.res.statusCode = 200
-      await next()
-    })
-
-    server.use(koaConnect(compression())) // before router.routes()
-    server.use(router.routes())
-    server.listen(port, (err) => {
-      if (err) { throw err }
-      console.log(`> Ready on http://localhost:${port}`)
-    })
+const staticAtRoot = (router, r) => {
+  // on /[X], read thru static/[X]
+  router.get('/' + r, async (ctx) => {
+    await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
+    ctx.respond = false
   })
+  // on static/[X] redirect to /[X]
+  router.get('/static/' + r, (ctx) => {
+    ctx.status = 301 // make it permanent (temporary by default)
+    ctx.redirect('/' + r)
+  })
+}
+
+const runner = () => {
+  const server = new Koa()
+  const router = new Router()
+
+  server.use(logger())
+  server.use(koaConnect(compression()))
+
+  staticAtRoot(router, 'favicon.ico')
+
+  const routes = ['', 'a', 'b', 'c']
+  routes.forEach((x) => router.get('/:lang(fr|en)/' + x, doit))
+  router.get('/:lang(fr|en)/c/:id', doit2)
+  router.get('/', doit3)
+
+  server.use(router.routes()) // replace with  koa-route
+
+  server.use(async (ctx) => {
+    await handle(ctx.req, ctx.res)
+    ctx.respond = false
+  })
+
+  server.use(async (ctx, next) => {
+    ctx.res.statusCode = 200
+    await next()
+  })
+
+  server.listen(port, (err) => {
+    if (err) { throw err }
+    console.log(`> Ready on http://localhost:${port}`)
+  })
+}
+
+app.prepare().then(runner)
