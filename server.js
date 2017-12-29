@@ -3,7 +3,7 @@
 // npm
 const Koa = require('koa')
 const next = require('next')
-const Router = require('koa-router') // replace with  koa-route
+const rte = require('koa-route') // replace with  koa-route
 const compression = require('compression')
 const koaConnect = require('koa-connect')
 const AsyncLRU = require('async-lru')
@@ -39,49 +39,42 @@ const lru = new AsyncLRU({
 
 const getit = promisify(lru.get.bind(lru))
 
-const doit = async (ctx) => {
+const topPageHandler = async (ctx) => {
   const p = ctx.url.split('/')[2] || 'index2'
   const it = '/' + p + '?lang=' + (ctx.params.lang.split('?')[0] || 'fr')
   ctx.body = await getit(it)
 }
 
-const doit2 = async (ctx) => {
+const cPageHandler = async (ctx) => {
   const it = '/c?id=' + ctx.params.id.split('?')[0] + '&lang=' + (ctx.params.lang.split('?')[0] || 'fr')
   ctx.body = await getit(it)
 }
 
-const doit3 = async (ctx) => {
-  ctx.body = await getit('/')
-}
-
-const staticAtRoot = (router, r) => {
+const staticAtRoot = (server, r) => {
   // on /[X], read thru static/[X]
-  router.get('/' + r, async (ctx) => {
+  server.use(rte.get('/' + r, async (ctx) => {
     await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
     ctx.respond = false
-  })
+  }))
+
   // on static/[X] redirect to /[X]
-  router.get('/static/' + r, (ctx) => {
+  server.use(rte.get('/static/' + r, (ctx) => {
     ctx.status = 301 // make it permanent (temporary by default)
     ctx.redirect('/' + r)
-  })
+  }))
 }
 
 const runner = () => {
   const server = new Koa()
-  const router = new Router()
 
   server.use(logger())
   server.use(koaConnect(compression()))
 
-  staticAtRoot(router, 'favicon.ico')
+  staticAtRoot(server, 'favicon.ico')
 
-  const routes = ['', 'a', 'b', 'c']
-  routes.forEach((x) => router.get('/:lang(fr|en)/' + x, doit))
-  router.get('/:lang(fr|en)/c/:id', doit2)
-  router.get('/', doit3)
-
-  server.use(router.routes()) // replace with  koa-route
+  ;['', 'a', 'b', 'c'].forEach((x) => server.use(rte.get('/:lang(fr|en)/' + x, topPageHandler)))
+  server.use(rte.get('/:lang(fr|en)/c/:id', cPageHandler))
+  server.use(rte.get('/', async (ctx) => { ctx.body = await getit('/') }))
 
   server.use(async (ctx) => {
     await handle(ctx.req, ctx.res)
@@ -99,4 +92,6 @@ const runner = () => {
   })
 }
 
-app.prepare().then(runner)
+app.prepare()
+  .then(runner)
+  .catch(console.error)
