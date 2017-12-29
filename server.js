@@ -7,6 +7,7 @@ const Router = require('koa-router')
 const compression = require('compression')
 const koaConnect = require('koa-connect')
 const AsyncLRU = require('async-lru')
+const logger = require('koa-logger')
 
 // core
 const { promisify } = require('util')
@@ -50,7 +51,6 @@ const doit2 = async (ctx) => {
 }
 
 const doit3 = async (ctx) => {
-  // const it = '/c?id=' + ctx.params.id.split('?')[0] + '&lang=' + (ctx.params.lang.split('?')[0] || 'fr')
   ctx.body = await getit('/')
 }
 
@@ -58,6 +58,8 @@ app.prepare()
   .then(() => {
     const server = new Koa()
     const router = new Router()
+
+    server.use(logger())
 
     // static assets available at /
     const rootStatic = ['favicon.ico']
