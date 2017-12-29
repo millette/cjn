@@ -49,6 +49,11 @@ const doit2 = async (ctx) => {
   ctx.body = await getit(it)
 }
 
+const doit3 = async (ctx) => {
+  // const it = '/c?id=' + ctx.params.id.split('?')[0] + '&lang=' + (ctx.params.lang.split('?')[0] || 'fr')
+  ctx.body = await getit('/')
+}
+
 app.prepare()
   .then(() => {
     const server = new Koa()
@@ -72,6 +77,7 @@ app.prepare()
     const routes = ['', 'a', 'b', 'c']
     routes.forEach((x) => router.get('/:lang/' + x, doit))
     router.get('/:lang/c/:id', doit2)
+    router.get('/', doit3)
 
     router.get('*', async (ctx) => {
       await handle(ctx.req, ctx.res)
