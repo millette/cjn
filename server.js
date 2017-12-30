@@ -44,17 +44,18 @@ const topPageHandler = async (ctx, lang) => {
 }
 
 const staticAtRoot = (server, r) => {
-  // on /[X], read thru static/[X]
-  server.use(router('/' + r, async (ctx) => {
+  const thru = async (ctx) => {
     await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
     ctx.respond = false
-  }))
+  }
 
-  // on static/[X] redirect to /[X]
-  server.use(router('/static/' + r, (ctx) => {
+  const redir = (ctx) => {
     ctx.status = 301 // make it permanent (temporary by default)
     ctx.redirect('/' + r)
-  }))
+  }
+
+  server.use(router('/' + r, thru))
+  server.use(router('/static/' + r, redir))
 }
 
 const runner = () => {
