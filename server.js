@@ -3,7 +3,7 @@
 // npm
 const Koa = require('koa')
 const next = require('next')
-const rte = require('koa-route') // replace with  koa-route
+const router = require('koa-route').get
 const compression = require('compression')
 const koaConnect = require('koa-connect')
 const AsyncLRU = require('async-lru')
@@ -39,26 +39,19 @@ const lru = new AsyncLRU({
 
 const getit = promisify(lru.get.bind(lru))
 
-const topPageHandler = async (ctx) => {
-  const p = ctx.url.split('/')[2] || 'index2'
-  const it = '/' + p + '?lang=' + (ctx.params.lang.split('?')[0] || 'fr')
-  ctx.body = await getit(it)
-}
-
-const cPageHandler = async (ctx) => {
-  const it = '/c?id=' + ctx.params.id.split('?')[0] + '&lang=' + (ctx.params.lang.split('?')[0] || 'fr')
-  ctx.body = await getit(it)
+const topPageHandler = async (ctx, lang) => {
+  ctx.body = await getit('/' + (ctx.url.split('/')[2] || 'index2') + '?lang=' + lang)
 }
 
 const staticAtRoot = (server, r) => {
   // on /[X], read thru static/[X]
-  server.use(rte.get('/' + r, async (ctx) => {
+  server.use(router('/' + r, async (ctx) => {
     await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
     ctx.respond = false
   }))
 
   // on static/[X] redirect to /[X]
-  server.use(rte.get('/static/' + r, (ctx) => {
+  server.use(router('/static/' + r, (ctx) => {
     ctx.status = 301 // make it permanent (temporary by default)
     ctx.redirect('/' + r)
   }))
@@ -72,9 +65,11 @@ const runner = () => {
 
   staticAtRoot(server, 'favicon.ico')
 
-  ;['', 'a', 'b', 'c'].forEach((x) => server.use(rte.get('/:lang(fr|en)/' + x, topPageHandler)))
-  server.use(rte.get('/:lang(fr|en)/c/:id', cPageHandler))
-  server.use(rte.get('/', async (ctx) => { ctx.body = await getit('/') }))
+  server.use(router('/', async (ctx) => { ctx.body = await getit('/') }))
+  ;['', 'a', 'b', 'c'].forEach((x) => server.use(router('/:lang(fr|en)/' + x, topPageHandler)))
+  server.use(router('/:lang(fr|en)/c/:id', async (ctx, lang, id) => {
+    ctx.body = await getit('/c?id=' + id + '&lang=' + lang)
+  }))
 
   server.use(async (ctx) => {
     await handle(ctx.req, ctx.res)
