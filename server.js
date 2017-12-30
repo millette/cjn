@@ -66,6 +66,9 @@ const runner = () => {
 
   staticAtRoot(server, 'favicon.ico')
 
+  server.use(router('/admin', async (ctx) => { ctx.body = await getit('/admin') }))
+  server.use(router('/admin/premiere', async (ctx) => { ctx.body = await getit('/admin/premiere') }))
+  server.use(router('/admin/b', async (ctx) => { ctx.body = await getit('/admin/b') }))
   server.use(router('/', async (ctx) => { ctx.body = await getit('/') }))
   ;['', 'a', 'b', 'c'].forEach((x) => server.use(router('/:lang(fr|en)/' + x, topPageHandler)))
   server.use(router('/:lang(fr|en)/c/:id', async (ctx, lang, id) => {
