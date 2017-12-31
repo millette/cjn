@@ -117,7 +117,7 @@ export default class Layout extends React.Component {
               <div className='columns has-text-centered'>
                 <div className='column'>
                   <a href='http://www.facebook.com/chantiersjeunesse'>
-                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/ie10626b9d35e4c9a/version/1447443298/image.png' alt='Facebook'/ >
+                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/ie10626b9d35e4c9a/version/1447443298/image.png' alt='Facebook' />
                   </a>
                 </div>
 
