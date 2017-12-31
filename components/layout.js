@@ -97,15 +97,65 @@ export default class Layout extends React.Component {
         </div>
 
         <footer className='footer'>
-          <p>Nous joindre</p>
           <div>
             Mentions et Logo des Partenaires
+          </div>
+
+          <div className='columns'>
+            <div className='column'>
+              <p>
+                Chantiers jeunesse<br />
+                4545 av. Pierre-De Coubertin<br />
+                Montréal, Québec(Canada)<br />
+                H1V 0B2<br />
+                1.514.252.3015<br />
+                1.800.361.2055<br />
+              </p>
+            </div>
+
+            <div className='column is-narrow'>
+              <div className='columns has-text-centered'>
+                <div className='column'>
+                  <a href='http://www.facebook.com/chantiersjeunesse'>
+                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/ie10626b9d35e4c9a/version/1447443298/image.png' alt='Facebook'/ >
+                  </a>
+                </div>
+
+                <div className='column'>
+                  <a href='https://www.youtube.com/channel/UCRsOtVF7T5yec2O5vrrio3Q'>
+                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i3e4a089b472ce543/version/1447443298/image.png' alt='YouTube' />
+                  </a>
+                </div>
+
+                <div className='column'>
+                  <a href='skype:chantiers.jeunesse?call'>
+                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i6a78e3a9ec22ba8f/version/1447443313/image.png' alt='Skype' />
+                  </a>
+                </div>
+
+                <div className='column'>
+                  <a href='mailto:cj@cj.qc.ca'>
+                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i6b25a7a9e629ade5/version/1447442020/image.png' alt='e-mail' />
+                  </a>
+                </div>
+
+                <div className='column'>
+                  <a href='https://www.instagram.com/Chantiersjeuness'>
+                    <img src='https://image.jimcdn.com/app/cms/image/transf/dimension=210x210:mode=crop:format=png/path/sd97e5c94889b28fd/image/i9efc4e3d4409ffab/version/1456329471/image.png' alt='Instagram' />
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </footer>
 
         <style global jsx>{`
-          .column {
+          .column666 {
             border: thin red solid;
+          }
+          a > img {
+            background-color: rgba(0,63,130,0.462);
+            width: 2em;
           }
         `}</style>
       </div>
