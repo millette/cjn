@@ -41,6 +41,7 @@ export default class LayoutAdmin extends React.Component {
           <meta charSet='utf-8' />
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
           <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
+          <script defer src='https://use.fontawesome.com/releases/v5.0.2/js/all.js' integrity='sha384-xiGKJ+4CP2p2WkTifyjHDeZVAg1zBrnJV8LU33N7J+5BWp1biPcSpEJJY7hFiRLn' crossOrigin='anonymous' />
         </Head>
         <header className='columns'>
           <div className='column'>
