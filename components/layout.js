@@ -72,10 +72,11 @@ export default class Layout extends React.Component {
         <header className='columns'>
           <div className='column'>
             <nav>
+              <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a>index</a></Link> |
               <Link prefetch href={{ pathname: '/a', query: { lang } }} as={`/${lang}/a`}><a>aaa</a></Link> |
               <Link prefetch href={{ pathname: '/b', query: { lang } }} as={`/${lang}/b`}><a>bbb</a></Link> |
               <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a>ccc</a></Link> |
-              <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a>index</a></Link>
+              <Link prefetch href='/admin'><a>admin</a></Link>
             </nav>
           </div>
           <Lng />
@@ -95,7 +96,7 @@ export default class Layout extends React.Component {
           </div>
         </div>
 
-        <footer>
+        <footer className='footer'>
           <p>Nous joindre</p>
           <div>
             Mentions et Logo des Partenaires
