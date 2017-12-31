@@ -15,13 +15,15 @@
     "lint": "standard"
   },
   "browser": {
-    "faker": false
+    "faker": false,
+    "fs": false
   },
   "dependencies": {
     "async-lru": "^1.1.1",
     "compression": "^1.7.1",
     "faker": "^4.1.0",
     "koa": "^2.4.1",
+    "koa-bodyparser": "^4.2.0",
     "koa-connect": "^2.0.0",
     "koa-logger": "^3.1.0",
     "koa-route": "^3.2.0",
