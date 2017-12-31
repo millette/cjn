@@ -62,6 +62,23 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
         a.button {
           margin-top: 1.25em;
         }
+
+        .hero-body {
+          margin: 1em 0;
+          /*
+           * i-1.jpg i-2.jpg i-3.jpg i-4.jpg i-5.jpg image2.jpg image.jpg
+           * image2: ok (shadow)
+           * i-1: ok (lively)
+           * i-2: hmm
+           * i-3: hmm
+           * i-4: medium (anonymous)
+           * i-5: medium (nature)
+           * i-5: medium (nature/lively)
+           */
+          background-image: url('/static/imgs/i-1.jpg');
+          background-size: cover;
+          background-position: center;
+        }
       `}</style>
 
     </section>
