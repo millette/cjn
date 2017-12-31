@@ -3,3 +3,8 @@ node_modules
 .next
 notes-00.txt
 yarn-error.log
+pages/index-orig.js
+components/form-one.js
+components/old-form-one.js
+components/semi-form-one.js
+data/pages/premiere-bu.json
