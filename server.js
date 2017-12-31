@@ -77,7 +77,12 @@ const runner = () => {
   server.use(route.post('/admin/premiere', async (ctx) => {
     await write('data/pages/premiere.json', ctx.request.rawBody)
     ctx.type = 'application/json'
-    ctx.body = '{"ok":true}'
+    const nKeys = Object.keys(ctx.request.body).length
+    ctx.body = {
+      ok: true,
+      nKeys,
+      message: `Écrit ${nKeys} champs avec succès.`
+    }
   }))
 
   server.use(route.get('/admin', async (ctx) => { ctx.body = await getit('/admin') }))

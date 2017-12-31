@@ -9,7 +9,7 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
     const x = new window.URL(url.asPath, 'http://localhost/')
     const retour = x.searchParams.get('retour')
     if (retour) {
-      Back = () => (<h2 className='subtitle is-3 has-text-centered'><Link prefetch href={retour}><a>Aller à la page précédente</a></Link></h2>)
+      Back = () => (<h2 className='subtitle is-3 has-text-centered'><i><Link href={retour}><a>Aller à la page précédente</a></Link></i></h2>)
     }
   }
 
@@ -50,7 +50,7 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
       </div>
       <div className='hero-foot'>
         <div className='container has-text-centered'>
-          <p>Nous contacter, etc.</p>
+          <p>Nous contacter, etc. <Link prefetch href='/admin'><a>admin</a></Link></p>
         </div>
       </div>
 
