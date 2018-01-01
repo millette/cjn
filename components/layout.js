@@ -2,6 +2,10 @@ import React from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
 
+import Adresse from './adresse'
+
+// import * as config from '../data/global/config.json'
+
 /*
  * Problèmes importants avec les embeds Facebook (iframe):
  * #1  lent
@@ -89,13 +93,14 @@ export default class Layout extends React.Component {
             </div>
           </nav>
         </header>
-        <div className='container'>
-          <div className='columns'>
-            <div className='column'>
-              { children }
-            </div>
-            <div className='column is-one-quarter'>
-              <div>
+
+        <section className='section'>
+          <div className='container'>
+            <div className='columns'>
+              <div className='column'>
+                { children }
+              </div>
+              <div className='column is-one-quarter'>
                 <p>
                   Timeline <a href='https://www.facebook.com/Chantiersjeunesse/'>Chantiers jeunesse</a> Facebook
                 </p>
@@ -103,22 +108,19 @@ export default class Layout extends React.Component {
               </div>
             </div>
           </div>
+        </section>
 
-          <footer className='footer'>
-            <div>
-              Mentions et Logo des Partenaires
-            </div>
+        <section className='section'>
+          <div>
+            Mentions et Logo des Partenaires
+          </div>
+        </section>
 
+        <footer className='footer'>
+          <div className='container'>
             <div className='columns'>
               <div className='column'>
-                <p>
-                  Chantiers jeunesse<br />
-                  4545 av. Pierre-De Coubertin<br />
-                  Montréal, Québec(Canada)<br />
-                  H1V 0B2<br />
-                  1.514.252.3015<br />
-                  1.800.361.2055<br />
-                </p>
+                <Adresse />
               </div>
 
               <div className='column is-narrow'>
@@ -155,8 +157,8 @@ export default class Layout extends React.Component {
                 </div>
               </div>
             </div>
-          </footer>
-        </div>
+          </div>
+        </footer>
 
         <style global jsx>{`
           footer a > img {
