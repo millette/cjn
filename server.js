@@ -15,14 +15,12 @@ const { promisify } = require('util')
 const { URL } = require('url')
 const fs = require('fs')
 
-const write = promisify(fs.writeFile)
-
 const port = parseInt(process.env.PORT, 10) || 3000
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
-
 const handle = app.getRequestHandler()
 
+const write = promisify(fs.writeFile)
 const renderToHTML = (key, o) => app.renderToHTML({}, {}, key, o)
 
 const lru = new AsyncLRU({
@@ -47,26 +45,28 @@ const topPageHandler = async (ctx, lang) => {
   ctx.body = await getit('/' + (ctx.url.split('/')[2] || 'index2') + '?lang=' + lang)
 }
 
-const staticAtRoot = (server, r) => {
+const staticAtRoot = (server, path) => {
   const thru = async (ctx) => {
-    await app.serveStatic(ctx.req, ctx.res, 'static/' + r)
+    ctx.res.statusCode = 200
+    await app.serveStatic(ctx.req, ctx.res, 'static/' + path)
     ctx.respond = false
   }
 
   const redir = (ctx) => {
     ctx.status = 301 // make it permanent (temporary by default)
-    ctx.redirect('/' + r)
+    ctx.redirect('/' + path)
   }
 
-  server.use(route.get('/' + r, thru))
-  server.use(route.get('/static/' + r, redir))
+  server.use(route.get('/' + path, thru))
+  server.use(route.get('/static/' + path, redir))
 }
 
 const runner = () => {
   const server = new Koa()
-  server.use(logger())
   server.use(koaConnect(compression()))
   server.use(bodyParser())
+  server.use(logger())
+
   staticAtRoot(server, 'favicon.ico')
 
   server.use(route.get('/data/**/*.json', (ctx) => {
