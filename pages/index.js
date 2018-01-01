@@ -23,7 +23,9 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
       </Head>
       <div className='hero-head'>
         <div className='container'>
-          <h1 className='title is-1 has-text-centered'>Chantiers jeunesse</h1>
+          <h1 className='title is-1 has-text-centered'>
+            <img src='/static/imgs/logo-cj.png' />
+            Chantiers jeunesse</h1>
           <Back />
         </div>
       </div>
@@ -55,6 +57,21 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
       </div>
 
       <style jsx>{`
+        h1 > img {
+          margin: 0 auto;
+          height: 3em;
+          display: block;
+        }
+
+        @media (min-width: 620px) {
+          h1 > img {
+            margin: 0 0.75em 0 0;
+            vertical-align: middle;
+            height: 1.5em;
+            display: inline;
+          }
+        }
+
         .hero {
           padding: 1.5em 0;
         }

@@ -70,12 +70,16 @@ export default class Layout extends React.Component {
           <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
         </Head>
         <header className='columns'>
+          <div className='column is-narrow'>
+            <img src='/static/imgs/logo-cj.png' />
+          </div>
           <div className='column'>
             <nav>
               <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a>index</a></Link>{' | '}
               <Link prefetch href={{ pathname: '/a', query: { lang } }} as={`/${lang}/a`}><a>aaa</a></Link>{' | '}
               <Link prefetch href={{ pathname: '/b', query: { lang } }} as={`/${lang}/b`}><a>bbb</a></Link>{' | '}
               <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a>ccc</a></Link>{' | '}
+              <Link prefetch href={{ pathname: '/contact', query: { lang } }} as={`/${lang}/contact`}><a>Contact</a></Link>{' | '}
               <Link prefetch href='/admin'><a>admin</a></Link>
             </nav>
           </div>
