@@ -71,11 +71,10 @@ export default class Layout extends React.Component {
         </Head>
         <header className='columns'>
           <div className='column is-narrow'>
-            <img src='/static/imgs/logo-cj.png' />
+            <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a><img src='/static/imgs/logo-cj.png' alt='Logo Chantiers jeunesse' /></a></Link>
           </div>
           <div className='column'>
             <nav>
-              <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a>index</a></Link>{' | '}
               <Link prefetch href={{ pathname: '/a', query: { lang } }} as={`/${lang}/a`}><a>aaa</a></Link>{' | '}
               <Link prefetch href={{ pathname: '/b', query: { lang } }} as={`/${lang}/b`}><a>bbb</a></Link>{' | '}
               <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a>ccc</a></Link>{' | '}
@@ -157,7 +156,16 @@ export default class Layout extends React.Component {
           .column666 {
             border: thin red solid;
           }
-          a > img {
+
+          header {
+            padding-top: 1em;
+          }
+
+          header img {
+            height: 2em;
+          }
+
+          footer a > img {
             background-color: rgba(0,63,130,0.462);
             width: 2em;
           }
