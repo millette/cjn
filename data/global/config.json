@@ -1,0 +1,22 @@
+{
+  "nom": "Chantiers jeunesse",
+  "adresse": {
+    "civiqueRue": " 4545, avenue Pierre-De Coubertin",
+    "ville": "Montréal",
+    "province2": "Québec",
+    "pays": "Canada",
+    "codePostal": "H1V 0B2"
+  },
+  "telephones": [
+    {
+      "type": "Téléphone",
+      "numero": "1.514.252.3015"
+    },
+    {
+      "type": "Sans-Frais",
+      "numero": "1.800.361.2055"
+    }
+  ],
+  "emailPrincipal": "cj@cj.qc.ca",
+  "facebook": "ChantiersJeunesse"
+}
