@@ -1,6 +1,8 @@
 import React from 'react'
 import Layout from '../components/layout'
 
+import Adresse from '../components/adresse'
+
 export default class Contact extends React.Component {
   static getInitialProps ({ query }) { return query }
 
@@ -10,7 +12,7 @@ export default class Contact extends React.Component {
     return (
       <Layout page='contact' lang={lang} title='Nous contacter'>
         <h2 className='title is-2'>Nous contacter {lang}</h2>
-        <p>Tralalère lère la.</p>
+        <Adresse className='box' />
       </Layout>
     )
   }
