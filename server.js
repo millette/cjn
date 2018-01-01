@@ -89,7 +89,7 @@ const runner = () => {
   server.use(route.get('/admin/premiere', async (ctx) => { ctx.body = await getit('/admin/premiere') }))
   server.use(route.get('/admin/b', async (ctx) => { ctx.body = await getit('/admin/b') }))
   server.use(route.get('/', async (ctx) => { ctx.body = await getit('/') }))
-  ;['', 'a', 'b', 'c'].forEach((x) => server.use(route.get('/:lang(fr|en)/' + x, topPageHandler)))
+  ;['', 'a', 'b', 'c', 'contact'].forEach((x) => server.use(route.get('/:lang(fr|en)/' + x, topPageHandler)))
   server.use(route.get('/:lang(fr|en)/c/:id', async (ctx, lang, id) => {
     ctx.body = await getit('/c?id=' + id + '&lang=' + lang)
   }))
