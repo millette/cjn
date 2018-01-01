@@ -34,7 +34,7 @@ export default class Layout extends React.Component {
   render () {
     const { id, page, title, lang, children } = this.props
 
-    const One = () => {
+    const Lng = () => {
       const p2 = page || 'index2'
       const p = id ? (page + '/' + id) : page
       let l
@@ -42,129 +42,123 @@ export default class Layout extends React.Component {
 
       if (lang === 'fr') {
         l = 'en'
-        str = 'Switch to English'
+        str = 'English'
       } else {
         l = 'fr'
-        str = 'Passer en français'
+        str = 'Français'
       }
 
-      return <Link href={{ pathname: '/' + p2, query: { id, lang: l } }} as={'/' + l + '/' + p}><a>{ str }</a></Link>
-    }
-
-    const Lng = () => {
-      return (
-        <div className='column is-one-quarter'>
-          <One />
-          <br />
-          espace membre
-        </div>
-      )
+      return <Link href={{ pathname: '/' + p2, query: { id, lang: l } }} as={'/' + l + '/' + p}><a className='navbar-item'>{ str }</a></Link>
     }
 
     return (
-      <div className='container'>
+      <div>
         <Head>
           <title>{ title } { lang }</title>
           <meta charSet='utf-8' />
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
           <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
         </Head>
-        <header className='columns'>
-          <div className='column is-narrow'>
-            <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a><img src='/static/imgs/logo-cj.png' alt='Logo Chantiers jeunesse' /></a></Link>
-          </div>
-          <div className='column'>
-            <nav>
-              <Link prefetch href={{ pathname: '/a', query: { lang } }} as={`/${lang}/a`}><a>aaa</a></Link>{' | '}
-              <Link prefetch href={{ pathname: '/b', query: { lang } }} as={`/${lang}/b`}><a>bbb</a></Link>{' | '}
-              <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a>ccc</a></Link>{' | '}
-              <Link prefetch href={{ pathname: '/contact', query: { lang } }} as={`/${lang}/contact`}><a>Contact</a></Link>{' | '}
-              <Link prefetch href='/admin'><a>admin</a></Link>
-            </nav>
-          </div>
-          <Lng />
-        </header>
 
-        <div className='columns'>
-          <div className='column'>
-            { children }
-          </div>
-          <div className='column is-one-quarter'>
-            <div>
-              <p>
-                Timeline <a href='https://www.facebook.com/Chantiersjeunesse/'>Chantiers jeunesse</a> Facebook
-              </p>
-              <div>Faire un Don</div>
+        <header className='header'>
+          <nav className={`navbar ${lang === 'fr' ? 'is-primary' : 'is-link'}`} role='navigation' aria-label='main navigation'>
+            <div className='navbar-brand'>
+              <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a className='navbar-item'><img src='/static/imgs/logo-cj.png' alt='Logo Chantiers jeunesse' /></a></Link>
+
+              <button className='button navbar-burger'>
+                <span />
+                <span />
+                <span />
+              </button>
             </div>
-          </div>
-        </div>
 
-        <footer className='footer'>
-          <div>
-            Mentions et Logo des Partenaires
-          </div>
+            <div className='navbar-menu'>
+              <div className='navbar-start'>
+                <Link prefetch href='/'><a className='navbar-item'>Top</a></Link>
+                <Link prefetch href={{ pathname: '/a', query: { lang } }} as={`/${lang}/a`}><a className='navbar-item'>aaa</a></Link>
+                <Link prefetch href={{ pathname: '/b', query: { lang } }} as={`/${lang}/b`}><a className='navbar-item'>bbb</a></Link>
+                <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a className='navbar-item'>ccc</a></Link>
+                <Link prefetch href={{ pathname: '/contact', query: { lang } }} as={`/${lang}/contact`}><a className='navbar-item'>Contact</a></Link>
+              </div>
 
+              <div className='navbar-end'>
+                <div className='navbar-item'>Membre</div>
+                <Link prefetch href='/admin'><a className='navbar-item'>admin</a></Link>
+                <Lng />
+              </div>
+            </div>
+          </nav>
+        </header>
+        <div className='container'>
           <div className='columns'>
             <div className='column'>
-              <p>
-                Chantiers jeunesse<br />
-                4545 av. Pierre-De Coubertin<br />
-                Montréal, Québec(Canada)<br />
-                H1V 0B2<br />
-                1.514.252.3015<br />
-                1.800.361.2055<br />
-              </p>
+              { children }
             </div>
-
-            <div className='column is-narrow'>
-              <div className='columns has-text-centered'>
-                <div className='column'>
-                  <a href='http://www.facebook.com/chantiersjeunesse'>
-                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/ie10626b9d35e4c9a/version/1447443298/image.png' alt='Facebook' />
-                  </a>
-                </div>
-
-                <div className='column'>
-                  <a href='https://www.youtube.com/channel/UCRsOtVF7T5yec2O5vrrio3Q'>
-                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i3e4a089b472ce543/version/1447443298/image.png' alt='YouTube' />
-                  </a>
-                </div>
-
-                <div className='column'>
-                  <a href='skype:chantiers.jeunesse?call'>
-                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i6a78e3a9ec22ba8f/version/1447443313/image.png' alt='Skype' />
-                  </a>
-                </div>
-
-                <div className='column'>
-                  <a href='mailto:cj@cj.qc.ca'>
-                    <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i6b25a7a9e629ade5/version/1447442020/image.png' alt='e-mail' />
-                  </a>
-                </div>
-
-                <div className='column'>
-                  <a href='https://www.instagram.com/Chantiersjeuness'>
-                    <img src='https://image.jimcdn.com/app/cms/image/transf/dimension=210x210:mode=crop:format=png/path/sd97e5c94889b28fd/image/i9efc4e3d4409ffab/version/1456329471/image.png' alt='Instagram' />
-                  </a>
-                </div>
+            <div className='column is-one-quarter'>
+              <div>
+                <p>
+                  Timeline <a href='https://www.facebook.com/Chantiersjeunesse/'>Chantiers jeunesse</a> Facebook
+                </p>
+                <div>Faire un Don</div>
               </div>
             </div>
           </div>
-        </footer>
+
+          <footer className='footer'>
+            <div>
+              Mentions et Logo des Partenaires
+            </div>
+
+            <div className='columns'>
+              <div className='column'>
+                <p>
+                  Chantiers jeunesse<br />
+                  4545 av. Pierre-De Coubertin<br />
+                  Montréal, Québec(Canada)<br />
+                  H1V 0B2<br />
+                  1.514.252.3015<br />
+                  1.800.361.2055<br />
+                </p>
+              </div>
+
+              <div className='column is-narrow'>
+                <div className='columns has-text-centered'>
+                  <div className='column'>
+                    <a href='http://www.facebook.com/chantiersjeunesse'>
+                      <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/ie10626b9d35e4c9a/version/1447443298/image.png' alt='Facebook' />
+                    </a>
+                  </div>
+
+                  <div className='column'>
+                    <a href='https://www.youtube.com/channel/UCRsOtVF7T5yec2O5vrrio3Q'>
+                      <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i3e4a089b472ce543/version/1447443298/image.png' alt='YouTube' />
+                    </a>
+                  </div>
+
+                  <div className='column'>
+                    <a href='skype:chantiers.jeunesse?call'>
+                      <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i6a78e3a9ec22ba8f/version/1447443313/image.png' alt='Skype' />
+                    </a>
+                  </div>
+
+                  <div className='column'>
+                    <a href='mailto:cj@cj.qc.ca'>
+                      <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i6b25a7a9e629ade5/version/1447442020/image.png' alt='e-mail' />
+                    </a>
+                  </div>
+
+                  <div className='column'>
+                    <a href='https://www.instagram.com/Chantiersjeuness'>
+                      <img src='https://image.jimcdn.com/app/cms/image/transf/dimension=210x210:mode=crop:format=png/path/sd97e5c94889b28fd/image/i9efc4e3d4409ffab/version/1456329471/image.png' alt='Instagram' />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+        </div>
 
         <style global jsx>{`
-          .column666 {
-            border: thin red solid;
-          }
-
-          header {
-            padding-top: 1em;
-          }
-
-          header img {
-            height: 2em;
-          }
-
           footer a > img {
             background-color: rgba(0,63,130,0.462);
             width: 2em;
