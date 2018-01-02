@@ -42,7 +42,7 @@ const lru = new AsyncLRU({
 const getit = promisify(lru.get.bind(lru))
 
 const topPageHandler = async (ctx, lang) => {
-  ctx.body = await getit('/' + (ctx.url.split('/')[2] || 'index2') + '?lang=' + lang)
+  ctx.body = await getit('/' + (ctx.url.split('/')[2] || 'front') + '?lang=' + lang)
 }
 
 const staticAtRoot = (server, path) => {

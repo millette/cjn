@@ -40,14 +40,14 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
               <div className='box has-text-centered'>
                 <h2 className='subtitle is-4'>{subtitleFr}</h2>
                 <p className='is-size-6'>{welcomeFr}</p>
-                <Link prefetch href='/index2?lang=fr' as='/fr/'><a className='button is-rounded is-large is-primary'>{linkFr}</a></Link>
+                <Link prefetch href='/front?lang=fr' as='/fr/'><a className='button is-rounded is-large is-primary'>{linkFr}</a></Link>
               </div>
             </div>
             <div className='column'>
               <div className='box has-text-centered'>
                 <h2 className='subtitle is-4'>{subtitleEn}</h2>
                 <p className='is-size-6'>{welcomeEn}</p>
-                <Link prefetch href='/index2?lang=en' as='/en/'><a className='button is-rounded is-large is-link'>{linkEn}</a></Link>
+                <Link prefetch href='/front?lang=en' as='/en/'><a className='button is-rounded is-large is-link'>{linkEn}</a></Link>
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@ export default class Layout extends React.Component {
     const { id, page, title, lang, children } = this.props
 
     const Lng = () => {
-      const p2 = page || 'index2'
+      const p2 = page || 'front'
       const p = id ? (page + '/' + id) : page
       let l
       let str
@@ -67,7 +67,7 @@ export default class Layout extends React.Component {
         <header className='header'>
           <nav className={`navbar ${lang === 'fr' ? 'is-primary' : 'is-link'}`} role='navigation' aria-label='main navigation'>
             <div className='navbar-brand'>
-              <Link prefetch href={{ pathname: '/index2', query: { lang } }} as={`/${lang}/`}><a className='navbar-item'><img src='/static/imgs/logo-cj.png' alt='Logo Chantiers jeunesse' /></a></Link>
+              <Link prefetch href={{ pathname: '/front', query: { lang } }} as={`/${lang}/`}><a className='navbar-item'><img src='/static/imgs/logo-cj.png' alt='Logo Chantiers jeunesse' /></a></Link>
 
               <button className='button navbar-burger'>
                 <span />
