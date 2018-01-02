@@ -25,7 +25,7 @@ const renderToHTML = (key, o) => app.renderToHTML({}, {}, key, o)
 
 const lru = new AsyncLRU({
   max: 20,
-  maxAge: 1000 * dev ? 15 : 3600, // 1 hour in prod, 15 seconds in dev
+  maxAge: 1000 * (dev ? 15 : 3600), // 1 hour in prod, 15 seconds in dev
   load: (key, cb) => {
     const u = new URL(key, 'http://localhost/')
     const n = u.pathname
