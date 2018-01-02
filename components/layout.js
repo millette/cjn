@@ -57,7 +57,7 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Head>
-          <title>{ title } { lang }</title>
+          <title>{title}</title>
           <meta charSet='utf-8' />
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
           <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
