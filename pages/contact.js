@@ -1,6 +1,5 @@
 import React from 'react'
 import Layout from '../components/layout'
-
 import Adresse from '../components/adresse'
 import SocialButtons from '../components/social-buttons'
 

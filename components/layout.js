@@ -111,7 +111,7 @@ export default class Layout extends React.Component {
         </section>
 
         <section className='section'>
-          <div>
+          <div className='container'>
             Mentions et Logo des Partenaires
           </div>
         </section>

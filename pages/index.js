@@ -55,7 +55,7 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
       </div>
       <div className='hero-foot'>
         <div className='container'>
-          <div className='columns is-centered'>
+          <div className='columns is-mobile is-centered'>
             <div className='column is-narrow'>
               <p>Nous contacter, etc. <Link prefetch href='/admin'><a>admin</a></Link></p>
               <SocialButtons />
