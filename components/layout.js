@@ -3,8 +3,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 import Adresse from './adresse'
-
-// import * as config from '../data/global/config.json'
+import SocialButtons from './social-buttons'
 
 /*
  * Problèmes importants avec les embeds Facebook (iframe):
@@ -62,6 +61,7 @@ export default class Layout extends React.Component {
           <meta charSet='utf-8' />
           <meta name='viewport' content='initial-scale=1.0, width=device-width' />
           <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
+          <script defer src='https://use.fontawesome.com/releases/v5.0.2/js/all.js' integrity='sha384-xiGKJ+4CP2p2WkTifyjHDeZVAg1zBrnJV8LU33N7J+5BWp1biPcSpEJJY7hFiRLn' crossOrigin='anonymous' />
         </Head>
 
         <header className='header'>
@@ -124,48 +124,11 @@ export default class Layout extends React.Component {
               </div>
 
               <div className='column is-narrow'>
-                <div className='columns has-text-centered'>
-                  <div className='column'>
-                    <a href='http://www.facebook.com/chantiersjeunesse'>
-                      <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/ie10626b9d35e4c9a/version/1447443298/image.png' alt='Facebook' />
-                    </a>
-                  </div>
-
-                  <div className='column'>
-                    <a href='https://www.youtube.com/channel/UCRsOtVF7T5yec2O5vrrio3Q'>
-                      <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i3e4a089b472ce543/version/1447443298/image.png' alt='YouTube' />
-                    </a>
-                  </div>
-
-                  <div className='column'>
-                    <a href='skype:chantiers.jeunesse?call'>
-                      <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i6a78e3a9ec22ba8f/version/1447443313/image.png' alt='Skype' />
-                    </a>
-                  </div>
-
-                  <div className='column'>
-                    <a href='mailto:cj@cj.qc.ca'>
-                      <img src='https://image.jimcdn.com/app/cms/image/transf/none/path/sd97e5c94889b28fd/image/i6b25a7a9e629ade5/version/1447442020/image.png' alt='e-mail' />
-                    </a>
-                  </div>
-
-                  <div className='column'>
-                    <a href='https://www.instagram.com/Chantiersjeuness'>
-                      <img src='https://image.jimcdn.com/app/cms/image/transf/dimension=210x210:mode=crop:format=png/path/sd97e5c94889b28fd/image/i9efc4e3d4409ffab/version/1456329471/image.png' alt='Instagram' />
-                    </a>
-                  </div>
-                </div>
+                <SocialButtons />
               </div>
             </div>
           </div>
         </footer>
-
-        <style global jsx>{`
-          footer a > img {
-            background-color: rgba(0,63,130,0.462);
-            width: 2em;
-          }
-        `}</style>
       </div>
     )
   }

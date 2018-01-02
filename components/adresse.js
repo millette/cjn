@@ -1,5 +1,3 @@
-import React from 'react'
-
 import * as config from '../data/global/config.json'
 
 export default ({className}) => <ul className={className}>

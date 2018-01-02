@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Head from 'next/head'
 import fs from 'fs'
 
+import SocialButtons from '../components/social-buttons'
+
 const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn }) => {
   let Back = () => null
 
@@ -20,6 +22,7 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
         <meta charSet='utf-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma@0.6.1/css/bulma.css' integrity='sha256-lUssH++umYLC/97WXqr424ew3ing8e+dATTAmMpCF40=' crossOrigin='anonymous' />
+        <script defer src='https://use.fontawesome.com/releases/v5.0.2/js/all.js' integrity='sha384-xiGKJ+4CP2p2WkTifyjHDeZVAg1zBrnJV8LU33N7J+5BWp1biPcSpEJJY7hFiRLn' crossOrigin='anonymous' />
       </Head>
       <div className='hero-head'>
         <div className='container'>
@@ -51,8 +54,13 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
         </div>
       </div>
       <div className='hero-foot'>
-        <div className='container has-text-centered'>
-          <p>Nous contacter, etc. <Link prefetch href='/admin'><a>admin</a></Link></p>
+        <div className='container'>
+          <div className='columns is-centered'>
+            <div className='column is-narrow'>
+              <p>Nous contacter, etc. <Link prefetch href='/admin'><a>admin</a></Link></p>
+              <SocialButtons />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -97,7 +105,6 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
           background-position: center;
         }
       `}</style>
-
     </section>
   )
 }
