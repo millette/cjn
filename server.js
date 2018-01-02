@@ -47,7 +47,13 @@ const page404Handler = async (ctx) => {
   ctx.respond = false
 }
 
+const aboutPageHandler = async (ctx, lang) => {
+  // console.log('LANG:', lang)
+  ctx.body = await getit('/about?lang=' + lang)
+}
+
 const topPageHandler = async (ctx, lang) => {
+  // console.log('LANG:', lang)
   ctx.body = await getit('/' + (ctx.url.split('/')[2] || 'front') + '?lang=' + lang)
 }
 
@@ -95,6 +101,19 @@ const runner = () => {
   server.use(route.get('/admin/premiere', async (ctx) => { ctx.body = await getit('/admin/premiere') }))
   server.use(route.get('/admin/b', async (ctx) => { ctx.body = await getit('/admin/b') }))
   server.use(route.get('/', async (ctx) => { ctx.body = await getit('/') }))
+
+  server.use(route.get('/en/a-propos', (ctx) => {
+    ctx.status = 301 // make it permanent (temporary by default)
+    ctx.redirect('/en/about')
+  }))
+
+  server.use(route.get('/fr/about', (ctx) => {
+    ctx.status = 301 // make it permanent (temporary by default)
+    ctx.redirect('/fr/a-propos')
+  }))
+
+  server.use(route.get('/:lang(fr)/a-propos', aboutPageHandler))
+  server.use(route.get('/:lang(en)/about', aboutPageHandler))
 
   const pages = ['', 'a', 'b', 'c', 'contact']
   pages.forEach((x) => server.use(route.get('/:lang(fr|en)/' + x, topPageHandler)))

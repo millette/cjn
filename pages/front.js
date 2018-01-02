@@ -16,20 +16,37 @@ export default class Index extends React.Component {
         <h2 className='subtitle is-2'>{pageInfo.soustitre[lang]}</h2>
         <p>Welcome, {name}</p>
         <div className='columns is-mobile is-multiline'>
-          {pageInfo.blocks.map((x, i) => (
-            <div key={i} className='column is-half-mobile is-one-third-tablet'>
-              <div className='card'>
-                <div className='card-content'>
-                  <h3 className='title is-6'>{x[lang].title}</h3>
+          {pageInfo.blocks.map((x, i) => {
+            const [l, p, id] = x[lang].path.split('/').slice(1)
+
+            const href = {
+              pathname: p,
+              query: {
+                lang: l
+              }
+            }
+
+            if (id) { href.query.id = id }
+
+            const as = x[lang].path
+
+            console.log('HREF:', as, href)
+
+            return (
+              <div key={i} className='column is-half-mobile is-one-third-tablet'>
+                <div className='card'>
+                  <div className='card-content'>
+                    <h3 className='title is-6'>{x[lang].title}</h3>
+                  </div>
+                  <footer className='card-footer'>
+                    <Link prefetch href={href} as={as}><a className='card-footer-item'>
+                      {lang === 'fr' ? 'En savoir plus' : 'More info'}
+                    </a></Link>
+                  </footer>
                 </div>
-                <footer className='card-footer'>
-                  <Link href={x[lang].path}><a className='card-footer-item'>
-                    {lang === 'fr' ? 'En savoir plus' : 'More info'}
-                  </a></Link>
-                </footer>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         <div>

@@ -51,7 +51,7 @@ export default class Layout extends React.Component {
         str = 'Français'
       }
 
-      return <Link href={{ pathname: '/' + p2, query: { id, lang: l } }} as={'/' + l + '/' + p}><a className='navbar-item'>{ str }</a></Link>
+      return <Link href={{ pathname: '/' + p2, query: { id, lang: l } }} as={'/' + l + '/' + ((l === 'fr' && p === 'about') ? 'a-propos' : p)}><a className='navbar-item'>{ str }</a></Link>
     }
 
     return (
