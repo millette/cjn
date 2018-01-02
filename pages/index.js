@@ -103,14 +103,24 @@ const Top = ({ url, subtitleFr, subtitleEn, linkFr, linkEn, welcomeFr, welcomeEn
 }
 
 Top.getInitialProps = async ({ req }) => {
+  const bail = (n, err, resolve) => {
+    console.log('ERR-FETCH#' + n, err)
+    const obj = {
+      linkFr: 'Français',
+      linkEn: 'English'
+    }
+    if (resolve) { return resolve(obj) }
+    return obj
+  }
+
   if (req) {
     return new Promise((resolve, reject) => {
       fs.readFile('data/pages/premiere.json', 'utf-8', (err, ok) => {
-        if (err) { return reject(err) }
+        if (err) { return bail(1, err, resolve) }
         try {
           resolve(JSON.parse(ok))
-        } catch (e) {
-          reject(e)
+        } catch (err) {
+          bail(2, err, resolve)
         }
       })
     })
@@ -118,6 +128,7 @@ Top.getInitialProps = async ({ req }) => {
 
   return window.fetch('/data/pages/premiere.json')
     .then((res) => res.json())
+    .catch(bail.bind(this, 3))
 }
 
 export default Top
