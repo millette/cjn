@@ -41,6 +41,12 @@ const lru = new AsyncLRU({
 
 const getit = promisify(lru.get.bind(lru))
 
+const page404Handler = async (ctx) => {
+  ctx.req.url = '*'
+  await handle(ctx.req, ctx.res)
+  ctx.respond = false
+}
+
 const topPageHandler = async (ctx, lang) => {
   ctx.body = await getit('/' + (ctx.url.split('/')[2] || 'front') + '?lang=' + lang)
 }
@@ -89,7 +95,11 @@ const runner = () => {
   server.use(route.get('/admin/premiere', async (ctx) => { ctx.body = await getit('/admin/premiere') }))
   server.use(route.get('/admin/b', async (ctx) => { ctx.body = await getit('/admin/b') }))
   server.use(route.get('/', async (ctx) => { ctx.body = await getit('/') }))
-  ;['', 'a', 'b', 'c', 'contact'].forEach((x) => server.use(route.get('/:lang(fr|en)/' + x, topPageHandler)))
+
+  const pages = ['', 'a', 'b', 'c', 'contact']
+  pages.forEach((x) => server.use(route.get('/:lang(fr|en)/' + x, topPageHandler)))
+  pages.concat(['front']).filter(Boolean).forEach((x) => server.use(route.get('/' + x, page404Handler)))
+
   server.use(route.get('/:lang(fr|en)/c/:id', async (ctx, lang, id) => {
     ctx.body = await getit('/c?id=' + id + '&lang=' + lang)
   }))
