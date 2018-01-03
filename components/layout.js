@@ -65,7 +65,7 @@ export default class Layout extends React.Component {
         </Head>
 
         <header className='header'>
-          <nav className={`navbar ${lang === 'fr' ? 'is-primary' : 'is-link'}`} role='navigation' aria-label='main navigation'>
+          <nav className={`navbar is-mobile ${lang === 'fr' ? 'is-primary' : 'is-link'}`} role='navigation' aria-label='main navigation'>
             <div className='navbar-brand'>
               <Link prefetch href={{ pathname: '/front', query: { lang } }} as={`/${lang}/`}><a className='navbar-item'><img src='/static/imgs/logo-cj.png' alt='Logo Chantiers jeunesse' /></a></Link>
 

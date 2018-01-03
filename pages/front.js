@@ -17,20 +17,17 @@ export default class Index extends React.Component {
         <p>Welcome, {name}</p>
         <div className='columns is-mobile is-multiline'>
           {pageInfo.blocks.map((x, i) => {
-            const [l, p, id] = x[lang].path.split('/').slice(1)
-
+            let [l, p, id] = x[lang].path.split('/').slice(1)
+            if (l === 'fr' && p === 'a-propos') { p = 'about' }
             const href = {
-              pathname: p,
+              pathname: `/${p}`,
               query: {
                 lang: l
               }
             }
 
             if (id) { href.query.id = id }
-
             const as = x[lang].path
-
-            console.log('HREF:', as, href)
 
             return (
               <div key={i} className='column is-half-mobile is-one-third-tablet'>
