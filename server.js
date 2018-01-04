@@ -115,7 +115,7 @@ const runner = () => {
   server.use(route.get('/:lang(fr)/a-propos', aboutPageHandler))
   server.use(route.get('/:lang(en)/about', aboutPageHandler))
 
-  const pages = ['', 'a', 'b', 'c', 'contact']
+  const pages = ['', 'c', 'contact']
   pages.forEach((x) => server.use(route.get('/:lang(fr|en)/' + x, topPageHandler)))
   pages.concat(['front']).filter(Boolean).forEach((x) => server.use(route.get('/' + x, page404Handler)))
 
