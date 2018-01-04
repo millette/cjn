@@ -133,8 +133,15 @@ Top.getInitialProps = async ({ req }) => {
     })
   }
 
+  // caching experiment
+  if (Top._cache) { return Top._cache }
+
   return window.fetch('/data/pages/premiere.json')
     .then((res) => res.json())
+    .then((json) => {
+      Top._cache = json
+      return json
+    })
     .catch(bail.bind(this, 3))
 }
 
