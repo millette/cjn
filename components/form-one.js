@@ -27,7 +27,7 @@ export default class FormOne extends React.Component {
   handleReset (event) { this.setState(this.initialInfo) }
 
   handleChange (event) {
-    console.log('VVV:', typeof event.target.value)
+    // console.log('VVV:', typeof event.target.value)
     const s = {
       success: false,
       danger: false
@@ -45,9 +45,9 @@ export default class FormOne extends React.Component {
 
     for (const r in this.state) {
       if (this.state[r].trim) {
-        this.initialInfo[r] =  this.state[r].trim()
+        this.initialInfo[r] = this.state[r].trim()
       } else if ((r !== 'success') && (r !== 'danger')) {
-        this.state[r]
+        this.state[r] = false // FIXME: what was this supposed to do?
       }
     }
     this.handleReset()
@@ -72,8 +72,8 @@ export default class FormOne extends React.Component {
     const SuccessNotification = () => {
       if (!this.state.success) { return null }
       return (
-        <div className="notification is-success">
-          <button type='button' onClick={this.handleChange} className="delete"></button>
+        <div className='notification is-success'>
+          <button type='button' onClick={this.handleChange} className='delete' />
           {this.state.success}
         </div>
       )
@@ -82,8 +82,8 @@ export default class FormOne extends React.Component {
     const DangerNotification = () => {
       if (!this.state.danger) { return null }
       return (
-        <div className="notification is-danger">
-          <button type='button' onClick={this.handleChange} className="delete"></button>
+        <div className='notification is-danger'>
+          <button type='button' onClick={this.handleChange} className='delete' />
           {this.state.danger}
         </div>
       )
