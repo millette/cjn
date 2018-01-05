@@ -81,6 +81,7 @@ export default class Layout extends React.Component {
                 <Link prefetch href='/'><a className='navbar-item'>Top</a></Link>
                 <Link prefetch href={{ pathname: '/c', query: { lang } }} as={`/${lang}/c`}><a className='navbar-item'>ccc</a></Link>
                 <Link prefetch href={{ pathname: '/about', query: { lang } }} as={`/${lang}/${lang === 'fr' ? 'a-propos' : 'about'}`}><a className='navbar-item'>À propos</a></Link>
+                <Link prefetch href={{ pathname: '/program', query: { lang } }} as={`/${lang}/${lang === 'fr' ? 'programme' : 'program'}`}><a className='navbar-item'>{lang === 'fr' ? 'Les programmes' : 'The programs' }</a></Link>
                 <Link prefetch href={{ pathname: '/contact', query: { lang } }} as={`/${lang}/contact`}><a className='navbar-item'>Contact</a></Link>
               </div>
 
