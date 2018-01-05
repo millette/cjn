@@ -1,0 +1,54 @@
+{
+  "programs": [
+    {
+      "fr": {
+        "title": "Programme CCI",
+        "path": "/fr/programme/cci"
+      },
+      "en": {
+        "title": "CCI Program",
+        "path": "/en/program/cci"
+      }
+    },
+    {
+      "fr": {
+        "title": "J'ai un projet pour ma communauté",
+        "path": "/fr/programme/communaute"
+      },
+      "en": {
+        "title": "J'ai un projet pour ma communauté (en)",
+        "path": "/en/program/community"
+      }
+    },
+    {
+      "fr": {
+        "title": "Chantier à l'internationnal",
+        "path": "/fr/programme/internationnal"
+      },
+      "en": {
+        "title": "International chantier (en)",
+        "path": "/en/program/international"
+      }
+    },
+    {
+      "fr": {
+        "title": "Accueillir un chantier",
+        "path": "/fr/programme/accueillir"
+      },
+      "en": {
+        "title": "Welcome a chantier (en)",
+        "path": "/en/program/welcome"
+      }
+    },
+    {
+      "fr": {
+        "title": "Programme CEIC",
+        "path": "/fr/programme/ceic"
+      },
+      "en": {
+        "title": "CEIC Program",
+        "path": "/en/program/ceic"
+      }
+    }
+  ]
+}
