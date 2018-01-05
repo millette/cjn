@@ -59,12 +59,16 @@ Program.getInitialProps = async (ppp) => {
     return obj
   }
 
-  const id = ppp.query.id
+  const { id, lang } = ppp.query
+
   let fn
 
   if (id) {
     switch (id) {
       case 'cci':
+        fn = `program/${id}.${lang}.json`
+        break
+
       case 'ceic':
         fn = `program/${id}.json`
         break
