@@ -1,3 +1,4 @@
+import Markdown from 'react-markdown'
 import Link from 'next/link'
 import Layout from '../components/layout'
 import fs from 'fs'
@@ -15,7 +16,14 @@ const Program = (ppp) => {
 
   if (id) {
     title = `Programme ${id}`
-    More = () => <p>{ppp.title}</p>
+    More = () => (
+      <div>
+        <h2 className='subtitle is-3'>{ppp.title}</h2>
+        <div className='content'>
+          <Markdown source={ppp.content} />
+        </div>
+      </div>
+    )
   } else {
     title = 'Programmes'
     More = () => null
