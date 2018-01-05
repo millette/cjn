@@ -46,6 +46,8 @@ export default class LayoutAdmin extends React.Component {
         <header className='columns'>
           <div className='column'>
             <nav>
+              <Link prefetch href='/front?lang=fr' as='/fr/'><a>fr</a></Link> |
+              <Link prefetch href='/front?lang=en' as='/en/'><a>en</a></Link> |
               <Link prefetch href='/admin'><a>admin</a></Link> |
               <Link prefetch href='/admin/premiere'><a>admin première page</a></Link> |
               <Link prefetch href='/admin/b'><a>admin B</a></Link>
