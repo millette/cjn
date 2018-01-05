@@ -35,7 +35,7 @@ const Program = (ppp) => {
       <ul>
         <li><Link href={`/program?lang=${lang}`} as={`/${lang}/program`}><a>programs</a></Link></li>
         {programs.map((x, i) => (
-          <li key={i}><Link href={`/program?lang=${lang}&id=${x[lang].id}`} as={`/${lang}/program/${x[lang].id}`}><a>{x[lang].title}</a></Link></li>
+          <li key={i}><Link href={`/program?lang=${lang}&id=${x[lang].id}`} as={`/${lang}/${lang === 'fr' ? 'programme' : 'program'}/${x[lang].id}`}><a>{x[lang].title}</a></Link></li>
         ))}
       </ul>
       <More />
@@ -45,8 +45,13 @@ const Program = (ppp) => {
 
 Program.getInitialProps = async (ppp) => {
   const { req } = ppp
+
   const bail = (n, err, resolve) => {
     console.error('ERR-FETCH#' + n, err)
+    // const err = new Error()
+    // err.code = 'ENOENT'
+    // throw err
+
     const obj = {
       title: 'Introuvable.'
     }
@@ -55,7 +60,33 @@ Program.getInitialProps = async (ppp) => {
   }
 
   const id = ppp.query.id
-  const fn = id ? `program/${id}.json` : 'program.json'
+  let fn
+
+  if (id) {
+    switch (id) {
+      case 'cci':
+      case 'ceic':
+        fn = `program/${id}.json`
+        break
+
+      case 'communaute':
+      case 'community':
+        fn = 'program/community.json'
+        break
+
+      case 'international':
+      case 'internationnal':
+        fn = 'program/international.json'
+        break
+
+      case 'welcome':
+      case 'accueillir':
+        fn = 'program/welcome.json'
+        break
+    }
+  } else {
+    fn = 'program.json'
+  }
 
   if (req) {
     return new Promise((resolve, reject) => {
@@ -80,6 +111,12 @@ Program.getInitialProps = async (ppp) => {
       return json
     })
     .catch(bail.bind(this, 3))
+    /*
+    .catch((err) => {
+      err.code = 'ENOENT'
+      throw err
+    })
+    */
 }
 
 export default Program

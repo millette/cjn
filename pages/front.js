@@ -19,6 +19,7 @@ export default class Index extends React.Component {
           {pageInfo.blocks.map((x, i) => {
             let [l, p, id] = x[lang].path.split('/').slice(1)
             if (l === 'fr' && p === 'a-propos') { p = 'about' }
+            if (l === 'fr' && p === 'programme') { p = 'program' }
             const href = {
               pathname: `/${p}`,
               query: {
