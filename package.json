@@ -6,6 +6,18 @@
   "engines": {
     "node": ">=8.9.3"
   },
+  "repository": "millette/cjn",
+  "author": {
+    "name": "Robin Millette",
+    "email": "robin@millette.info",
+    "url": "http://robin.millette.info"
+  },
+  "keywords": [
+    "react",
+    "koa",
+    "next",
+    "nextjs"
+  ],
   "scripts": {
     "dev": "standard && node server",
     "build": "standard && next build",
