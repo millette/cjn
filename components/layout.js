@@ -37,6 +37,49 @@ export default class Layout extends React.Component {
   render () {
     const { id, page, title, lang, children } = this.props
 
+/*
+    const crumbsImp = [lang, page || 'front']
+    // if (page) { crumbsImp.push(page) }
+    if (id) { crumbsImp.push(id) }
+    // console.log('CRUMBS-0:', crumbsImp)
+
+    const crumbs = ['index', '/'].concat(crumbsImp).map((x, i) => {
+      const ret = [
+        x,
+        '/' + crumbsImp.slice(0, i + 1).join('/')
+      ]
+      switch (crumbsImp.length) {
+        case 1:
+          ret.push('/index')
+          break
+
+        case 2:
+          ret.push('/front')
+          break
+
+        case 3:
+          ret.push(x)
+          break
+      }
+
+      return ret
+    })
+
+    console.log('CRUMBS:', crumbs)
+
+    const Crumbs = () => (
+      <nav className='breadcrumb' aria-label='breadcrumbs'>
+        <ul>
+          {crumbs.map((x, i) => (
+            <li key={i}><Link href={{ pathname: x[2], query: { id, lang } }} as={x[1]}><a>{x[0]}</a></Link></li>
+          ))}
+        </ul>
+      </nav>
+    )
+*/
+
+    const Crumbs = () => null
+
     const Lng = () => {
       const p2 = page || 'front'
       const p = id ? (page + '/' + id) : page
@@ -96,6 +139,7 @@ export default class Layout extends React.Component {
 
         <section className='section'>
           <div className='container'>
+            <Crumbs />
             <div className='columns'>
               <div className='column'>
                 { children }
